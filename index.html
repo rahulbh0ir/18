@@ -6,6 +6,9 @@
   <title>Document</title>
 </head>
 <body>
+
+  <div id="demo">Total Time : </div>
+
   <ul class="videos">
     <li data-time="5:43">
       Video 1
@@ -187,8 +190,26 @@
 
  <script>
 
+  const all = [... document.querySelectorAll("[data-time]") ]
+  const seconds = all
+    .map(pie => pie.dataset.time)
+    .map(time => {
+        const [ mins, secs ] = time.split(":").map(parseFloat)
+        return (mins * 60) + secs
+      })
+    .reduce((total, value) => total + value );
+      
+  let secondsLeft = seconds;
+
+  const hours = Math.floor(secondsLeft / 3600);
+  secondsLeft = secondsLeft % 3600
+
+  const mins = Math.floor(secondsLeft / 60)
+  secondsLeft = secondsLeft % 60
+
+  document.getElementById("demo").innerHTML += hours + " : " + mins + " : " + secondsLeft
   
- 
+
  </script> 
 
 
